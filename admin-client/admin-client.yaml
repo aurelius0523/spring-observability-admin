@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: admin-client-deployment
+  labels:
+    app: admin-client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: admin-client
+  template:
+    metadata:
+      labels:
+        app: admin-client
+    spec:
+      containers:
+        - name: admin-client
+          image: aurelius0523/admin-client-docker
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7080
+
+---
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: admin-client-lb
+
+spec:
+  type: LoadBalancer
+  selector:
+    app: admin-client
+  ports:
+    - targetPort: 7080
+      port: 7080
