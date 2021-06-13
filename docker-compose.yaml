@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  admin-client-one:
+    image: aurelius0523/admin-client-docker
+    restart: always
+
+  admin-client-two:
+    image: aurelius0523/admin-client-docker
+    restart: always
+
+  admin:
+    image: aurelius0523/admin-server-docker
+    restart: always
+    ports:
+      - 8080:8080
