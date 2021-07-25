@@ -1,17 +1,14 @@
-kind: Deployment
 apiVersion: apps/v1
-
+kind: Deployment
 metadata:
-  name: admin-server-deployment
+  name: admin-server
   labels:
     app: admin-server
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: admin-server
+  replicas: 1
   template:
     metadata:
+      name: admin-server
       labels:
         app: admin-server
     spec:
@@ -21,18 +18,20 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: admin-server
 
 ---
-kind: Service
 apiVersion: v1
-
+kind: Service
 metadata:
-  name: admin-server-lb
-
+  name: admin-server-service
 spec:
-  type: LoadBalancer
   selector:
     app: admin-server
   ports:
     - targetPort: 8080
       port: 8080
+  type: LoadBalancer

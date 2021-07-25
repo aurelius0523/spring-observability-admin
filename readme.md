@@ -6,9 +6,19 @@ for [observability](https://microservices.io/patterns/observability/application-
 tracked by `Spring Admin`
 
 ## How to run
+### Docker-compose
+1. Run `create-images.bat` to create images for both `admin client` and `admin server`
+1. Run `start-compose.bat`  
+1. Check result at http://localhost:8080/#/applications/spring-boot-application
 
-Simply execute `start-compose.bat` and you're good to go.
+### Kubernetes
+1. Run `create-images.bat` to create images for both `admin client` and `admin server`
+1. Run `kubectl apply -f kubernetes`
+1. Check result at http://localhost:8080/#/applications/spring-boot-application
 
-## TODO
+## Differences
+### Docker-compose setup
+![docker-compose setup](docs/docker-compose.png )
 
-1. Add kubernetes support
+### kubernetes setup
+![kubernetes setup](docs/kubernetes.png )
